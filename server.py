@@ -5,7 +5,9 @@ from flask import Flask, render_template, g
 import sys, os
 from os.path import isfile, join
 
-app = Flask(__name__)
+program_directory = os.path.dirname(os.path.realpath(__file__))
+template_dir = os.path.join(program_directory, "templates")
+app = Flask(__name__, template_folder=template_dir)
 
 def get_filenames_from_root(file_root):
     filenames = []
