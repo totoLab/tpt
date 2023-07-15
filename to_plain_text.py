@@ -8,15 +8,20 @@ def print_return_error(err):
     print(err)
     return err
 
+def with_pandoc(filepath):
+    try:
+        plain_text = pypandoc.convert_file(filepath, 'plain')
+        return plain_text
+        
+    except Exception as e:
+        return print_return_error(f"Error converting {filepath} to plain text.")
+
+
 def from_docx(filepath):
-    output = pypandoc.convert_file(filepath, 'plain')
-    if output is None or output == "":
-        print("ERR: empty output.")
-        return "Empty file."
-    return output
+    return with_pandoc(filepath)
 
 def from_doc(filepath):
-    return from_docx(filepath)
+    return with_pandoc(filepath)
 
 def from_pdf(filepath):
     return todo()
