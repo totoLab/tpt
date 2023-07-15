@@ -2,7 +2,9 @@ import sys
 import pypandoc
 
 def todo():
-    err = "Not implemented"
+    return print_return_error("Not yet implemented.")
+
+def print_return_error(err):
     print(err)
     return err
 
@@ -24,7 +26,8 @@ def from_plain_text(filepath):
         output = f.read()
     
     if output is None or output == "":
-        print("ERR: empty output.")
+        return print_return_error(f"Error gathering text from {filepath}.")
+
     return output
 
 def get_content(filepath):
@@ -41,6 +44,5 @@ def get_content(filepath):
     elif ext == "doc":
         return from_doc(filepath)
     else:
-        err = f"Extension {ext} is not yet supported."
-        print(err)
-        return err
+        return print_return_error(f"Extension {ext} is not yet supported.")
+        
