@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import to_plain_text as tpt
 from flask import Flask, render_template, g 
 import sys, os
