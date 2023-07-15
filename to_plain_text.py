@@ -1,5 +1,6 @@
 import sys
 import pypandoc
+import PyPDF2
 
 def todo():
     return print_return_error("Not yet implemented.")
@@ -24,7 +25,20 @@ def from_doc(filepath):
     return with_pandoc(filepath)
 
 def from_pdf(filepath):
-    return todo()
+    try:
+        with open(filepath, 'rb') as file:
+            reader = PyPDF2.PdfFileReader(file)
+            num_pages = reader.numPages
+            
+            plain_text = ''
+            for page_num in range(num_pages):
+                page = reader.getPage(page_num)
+                plain_text += page.extractText()
+                
+        return plain_text.strip()
+        
+    except Exception as e:
+        return print_return_error(f"Error converting {filepath} to plain text.")
 
 def from_plain_text(filepath):
     with open(filepath, "r") as f:
