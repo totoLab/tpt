@@ -42,13 +42,13 @@ def from_pptx(filepath):
 def from_pdf(filepath):
     try:
         with open(filepath, 'rb') as file:
-            reader = PyPDF2.PdfFileReader(file)
-            num_pages = reader.numPages
+            reader = PyPDF2.PdfReader(file)
+            num_pages = len(reader.pages) 
             
             plain_text = ''
             for page_num in range(num_pages):
-                page = reader.getPage(page_num)
-                plain_text += page.extractText()
+                page = reader.pages[page_num]
+                plain_text += page.extract_text()
                 
         return plain_text.strip()
         
@@ -81,4 +81,3 @@ def get_content(filepath):
         return from_pptx(filepath)
     else:
         return print_return_error(f"Extension {ext} is not yet supported.")
-        
