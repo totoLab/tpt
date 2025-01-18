@@ -2,7 +2,7 @@
 
 ### Dependencies
 ```
-flask pypandoc PyPDF2
+flask pypandoc PyPDF2 python-pptx
 ```
 
 ### Usage
