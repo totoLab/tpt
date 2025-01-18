@@ -23,6 +23,7 @@ def get_filenames_from_root(file_root):
 def before_request():
     g.file_directory = os.path.abspath(file_directory)
     g.filenames = get_filenames_from_root(g.file_directory)
+    g.filenames.sort()
 
 @app.route('/')
 def index():
